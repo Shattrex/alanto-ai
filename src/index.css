@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply antialiased bg-cream-100 text-ink-700;
+  }
+}
+
+/* Heading treatments lifted from the live alantoai.com hero and sections. */
+.head {
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #3b2a1c;
+}
+
+.head-shadow {
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
+}
+
+.head-glow {
+  text-shadow:
+    0 0 6px rgba(253, 224, 71, 0.6),
+    0 0 12px rgba(253, 224, 71, 0.3);
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  background: #e87d3e;
+  vertical-align: -0.12em;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+@keyframes ring-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-x {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes frame-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.86) translateY(24px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.03) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.frame-pop {
+  animation: frame-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes reveal-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  70% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reveals are CSS-driven with fill-mode both so content can never be
+   left stranded at opacity 0 if animation frames are throttled. */
+.reveal {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-x {
+  animation: reveal-x 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-pop {
+  animation: reveal-pop 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-x,
+  .reveal-pop,
+  .frame-pop {
+    animation-duration: 0.01s;
+    animation-delay: 0s !important;
+  }
+}
+
+.scan-line {
+  animation: scan 2.4s linear infinite;
+}
+
+.ring-pulse {
+  animation: ring-pulse 1.8s ease-out infinite;
+}
+
+.float-y {
+  animation: float-y 4s ease-in-out infinite;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hanger-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.hanger-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter;
+}
