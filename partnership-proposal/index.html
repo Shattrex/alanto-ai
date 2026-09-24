@@ -152,6 +152,34 @@
         font-size: 24px;
         font-weight: 300;
       }
+      .why {
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+      .points { display: flex; flex-direction: column; gap: 16px; }
+      .point {
+        background: white;
+        border-radius: 20px;
+        padding: 26px 30px 24px;
+        box-shadow: 0 18px 40px rgba(20, 17, 14, 0.08);
+      }
+      .point h2 {
+        margin: 0;
+        font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+        font-weight: 500;
+        font-size: 36px;
+      }
+      .point p {
+        margin: 8px 0 0;
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 1.4;
+        color: var(--muted);
+      }
+      .why figure img { height: 560px; }
       .pager {
         position: absolute;
         left: 80px;
@@ -192,7 +220,7 @@
             </figure>
             <figure>
               <img src="photos/action-pro.jpg" alt="Action Pro storefront" />
-              <figcaption>Action Pro<span>Lifestyle store</span></figcaption>
+              <figcaption>Action Pro<span>Lifestyle and fashion store</span></figcaption>
             </figure>
           </div>
         </section>
@@ -223,24 +251,56 @@
           </div>
           <p class="note">The receipt has to be from the same day. That is the whole partnership.</p>
         </section>
+
+        <section class="slide" id="page3">
+          <p class="kicker">For Leafy Brew</p>
+          <h1>Your customers get more than coffee.</h1>
+          <p class="lead">A Leafy Brew customer can take today’s receipt to Action Pro, get a discount, and shop.</p>
+          <div class="why">
+            <div class="points">
+              <article class="point">
+                <h2>A discount</h2>
+                <p>They buy at Leafy Brew, show the same-day receipt at Action Pro, and get X% off.</p>
+              </article>
+              <article class="point">
+                <h2>A shopping experience</h2>
+                <p>Action Pro is a lifestyle and fashion store. Clothes, style, and everyday pieces, on the same day.</p>
+              </article>
+              <article class="point">
+                <h2>A stronger reason to visit</h2>
+                <p>Leafy Brew offers more than the cup. Guests leave with a discount and a place to shop.</p>
+              </article>
+            </div>
+            <figure>
+              <img src="photos/action-pro.jpg" alt="Action Pro, a lifestyle and fashion store" />
+              <figcaption>Action Pro<span>Lifestyle and fashion store</span></figcaption>
+            </figure>
+          </div>
+        </section>
         <div class="pager">
           <button type="button" id="btn1" class="on">Page 1</button>
           <button type="button" id="btn2">Page 2</button>
+          <button type="button" id="btn3">Page 3</button>
         </div>
       </div>
     </div>
 
     <script>
-      const slides = [document.getElementById("page1"), document.getElementById("page2")];
-      const buttons = [document.getElementById("btn1"), document.getElementById("btn2")];
+      const slides = [document.getElementById("page1"), document.getElementById("page2"), document.getElementById("page3")];
+      const buttons = [document.getElementById("btn1"), document.getElementById("btn2"), document.getElementById("btn3")];
+      let current = 0;
       function show(i) {
-        slides.forEach((s, n) => s.classList.toggle("on", n === i));
-        buttons.forEach((b, n) => b.classList.toggle("on", n === i));
+        current = (i + slides.length) % slides.length;
+        slides.forEach((s, n) => s.classList.toggle("on", n === current));
+        buttons.forEach((b, n) => b.classList.toggle("on", n === current));
       }
       buttons.forEach((b, i) => b.addEventListener("click", () => show(i)));
       document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight" || e.key === "2") show(1);
-        if (e.key === "ArrowLeft" || e.key === "1") show(0);
+        if (e.key === "ArrowRight") show(current + 1);
+        if (e.key === "ArrowLeft") show(current - 1);
+        if (e.key === "1") show(0);
+        if (e.key === "2") show(1);
+        if (e.key === "3") show(2);
       });
       function fit() {
         const availH = window.innerHeight;

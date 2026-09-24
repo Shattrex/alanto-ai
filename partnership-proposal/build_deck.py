@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Two-slide Action Pro × Leafy Brew partnership deck."""
+"""Three-slide Action Pro × Leafy Brew partnership deck."""
 
 import os
 
@@ -53,7 +53,7 @@ def main():
     s1.shapes.add_picture(os.path.join(ROOT, "photos/leafy-brew.jpg"), Inches(0.55), Inches(2.35), Inches(6.0), Inches(4.15))
     s1.shapes.add_picture(os.path.join(ROOT, "photos/action-pro.jpg"), Inches(6.8), Inches(2.35), Inches(6.0), Inches(4.15))
     text(s1, 0.55, 6.6, 5.5, 0.55, "Leafy Brew\nCoffee & Positivitea Company", size=14, bold=True)
-    text(s1, 6.8, 6.6, 5.5, 0.55, "Action Pro\nLifestyle store", size=14, bold=True)
+    text(s1, 6.8, 6.6, 5.5, 0.55, "Action Pro\nLifestyle and fashion store", size=14, bold=True)
 
     s2 = prs.slides.add_slide(blank)
     bg(s2, CREAM)
@@ -82,7 +82,31 @@ def main():
 
     text(s2, 0.55, 6.15, 12, 0.5,
          "The receipt has to be from the same day. That is the whole partnership.", size=18)
-    text(s2, 0.55, 6.9, 3, 0.3, "Page 1  ·  Page 2", size=12, color=MUTED)
+    text(s2, 0.55, 6.9, 4, 0.3, "Page 1  ·  Page 2  ·  Page 3", size=12, color=MUTED)
+
+    s3 = prs.slides.add_slide(blank)
+    bg(s3, CREAM)
+    text(s3, 0.55, 0.32, 8, 0.28, "FOR LEAFY BREW", size=12, color=RGBColor(0x6B, 0x4A, 0x32))
+    text(s3, 0.5, 0.55, 12, 0.7, "Your customers get more than coffee.", size=36, font="Georgia")
+    text(s3, 0.55, 1.35, 7.2, 0.7,
+         "A Leafy Brew customer can take today’s receipt to Action Pro, get a discount, and shop.",
+         size=16)
+    points = [
+        ("A discount", "They buy at Leafy Brew, show the same-day receipt at Action Pro, and get X% off."),
+        ("A shopping experience", "Action Pro is a lifestyle and fashion store. Clothes, style, and everyday pieces, on the same day."),
+        ("A stronger reason to visit", "Leafy Brew offers more than the cup. Guests leave with a discount and a place to shop."),
+    ]
+    y = 2.2
+    for title, body in points:
+        card = s3.shapes.add_shape(1, Inches(0.55), Inches(y), Inches(7.15), Inches(1.35))
+        card.fill.solid()
+        card.fill.fore_color.rgb = WHITE
+        card.line.fill.background()
+        text(s3, 0.8, y + 0.18, 6.7, 0.4, title, size=22, font="Georgia")
+        text(s3, 0.8, y + 0.62, 6.7, 0.55, body, size=14, color=MUTED)
+        y += 1.5
+    s3.shapes.add_picture(os.path.join(ROOT, "photos/action-pro.jpg"), Inches(8.0), Inches(2.2), Inches(4.75), Inches(4.15))
+    text(s3, 8.0, 6.45, 4.75, 0.55, "Action Pro\nLifestyle and fashion store", size=14, bold=True)
 
     out = os.path.join(ROOT, "Action-Pro-x-Leafy-Brew-Partnership.pptx")
     prs.save(out)
