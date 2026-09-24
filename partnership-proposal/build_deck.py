@@ -65,12 +65,16 @@ def main():
          "1   Buy something at Leafy Brew.",
          "2   Show today’s invoice at Action Pro.",
          "Get X% off at Action Pro"),
-        (7.05, "photos/action-pro.jpg", "Buy at Action Pro",
+        (7.05, None, "Buy at Action Pro",
          "1   Buy something at Action Pro.",
          "2   Show today’s invoice at Leafy Brew.",
          "Get X% off at Leafy Brew"),
     ):
-        s2.shapes.add_picture(os.path.join(ROOT, photo), Inches(x), Inches(1.5), Inches(5.75), Inches(2.15))
+        if photo:
+            s2.shapes.add_picture(os.path.join(ROOT, photo), Inches(x), Inches(1.5), Inches(5.75), Inches(2.15))
+        else:
+            for i, name in enumerate(("action-pro-floor.jpg", "action-pro-makeup.jpg", "action-pro-racks.jpg")):
+                s2.shapes.add_picture(os.path.join(ROOT, "photos", name), Inches(x + i * 1.95), Inches(1.5), Inches(1.88), Inches(2.15))
         text(s2, x, 3.75, 5.6, 0.45, title, size=26, font="Georgia")
         text(s2, x, 4.3, 5.6, 0.35, step1, size=16)
         text(s2, x, 4.7, 5.6, 0.35, step2, size=16)
@@ -105,8 +109,10 @@ def main():
         text(s3, 0.8, y + 0.18, 6.7, 0.4, title, size=22, font="Georgia")
         text(s3, 0.8, y + 0.62, 6.7, 0.55, body, size=14, color=MUTED)
         y += 1.5
-    s3.shapes.add_picture(os.path.join(ROOT, "photos/action-pro.jpg"), Inches(8.0), Inches(2.2), Inches(4.75), Inches(4.15))
-    text(s3, 8.0, 6.45, 4.75, 0.55, "Action Pro\nLifestyle and fashion store", size=14, bold=True)
+    s3.shapes.add_picture(os.path.join(ROOT, "photos/action-pro-floor.jpg"), Inches(8.0), Inches(2.2), Inches(4.75), Inches(2.35))
+    s3.shapes.add_picture(os.path.join(ROOT, "photos/action-pro-makeup.jpg"), Inches(8.0), Inches(4.65), Inches(2.3), Inches(1.7))
+    s3.shapes.add_picture(os.path.join(ROOT, "photos/action-pro-racks.jpg"), Inches(10.45), Inches(4.65), Inches(2.3), Inches(1.7))
+    text(s3, 8.0, 6.5, 4.75, 0.55, "Action Pro\nLifestyle and fashion store", size=14, bold=True)
 
     out = os.path.join(ROOT, "Action-Pro-x-Leafy-Brew-Partnership.pptx")
     prs.save(out)

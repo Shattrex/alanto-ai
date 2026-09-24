@@ -105,6 +105,15 @@
         object-fit: cover;
         border-radius: 14px;
       }
+      .trio {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+      }
+      .trio img {
+        height: 220px;
+        border-radius: 10px;
+      }
       .path h2 {
         font-family: "Cormorant Garamond", Palatino, Georgia, serif;
         font-weight: 500;
@@ -179,7 +188,26 @@
         line-height: 1.4;
         color: var(--muted);
       }
-      .why figure img { height: 560px; }
+      .gallery .wide {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 16px;
+        display: block;
+      }
+      .gallery .pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .gallery .pair img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        border-radius: 14px;
+        display: block;
+      }
       .pager {
         position: absolute;
         left: 80px;
@@ -240,7 +268,11 @@
             </article>
             <div class="mid">+</div>
             <article class="path">
-              <img src="photos/action-pro.jpg" alt="Action Pro" />
+              <div class="trio">
+                <img src="photos/action-pro-floor.jpg" alt="Clothing and lifestyle products at Action Pro" />
+                <img src="photos/action-pro-makeup.jpg" alt="Makeup at Action Pro" />
+                <img src="photos/action-pro-racks.jpg" alt="Fashion and home products at Action Pro" />
+              </div>
               <h2>Buy at Action Pro</h2>
               <ol>
                 <li><b>1</b> Buy something at Action Pro.</li>
@@ -271,8 +303,12 @@
                 <p>Leafy Brew offers more than the cup. Guests leave with a discount and a place to shop.</p>
               </article>
             </div>
-            <figure>
-              <img src="photos/action-pro.jpg" alt="Action Pro, a lifestyle and fashion store" />
+            <figure class="gallery">
+              <img class="wide" src="photos/action-pro-floor.jpg" alt="Clothing and lifestyle products at Action Pro" />
+              <div class="pair">
+                <img src="photos/action-pro-makeup.jpg" alt="Makeup at Action Pro" />
+                <img src="photos/action-pro-racks.jpg" alt="Fashion and home products at Action Pro" />
+              </div>
               <figcaption>Action Pro<span>Lifestyle and fashion store</span></figcaption>
             </figure>
           </div>
