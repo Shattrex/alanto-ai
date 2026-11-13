@@ -4,51 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: {
-          50: "#FFFcf7",
-          100: "#FDF9F3",
-          200: "#F6EFE3",
-          300: "#EDE3D2",
-        },
-        ink: {
-          400: "#7A6A5E",
-          500: "#5C4A3E",
-          700: "#3C2A21",
-          900: "#241610",
-        },
-        ember: {
-          300: "#F0A36A",
-          400: "#E87D3E",
-          500: "#D96A2B",
-          600: "#C4561C",
-        },
-        flame: {
-          400: "#E23B2E",
-          500: "#C62828",
-        },
-        gold: {
-          50: "#faf6eb",
-          200: "#e6d199",
-          300: "#d4b55c",
-          400: "#c9a227",
-          500: "#b8921f",
-        },
+        base: "#070707",
+        r1: "#0B0B0D",
+        r2: "#101012",
+        r3: "#141416",
+        fg: "#F4F4F2",
+        mute: "#8F9097",
+        dim: "#5C5D64",
+        ice: "#B9D9FF",
+        line: "rgba(255,255,255,0.08)",
+        "line-strong": "rgba(255,255,255,0.16)",
       },
       fontFamily: {
-        sans: ["Outfit", "system-ui", "sans-serif"],
-        // Matches the live alantoai.com headings.
-        heading: ["Bebas Neue", "Impact", "sans-serif"],
-        display: ["Cormorant Garamond", "Georgia", "serif"],
-        script: ["Great Vibes", "cursive"],
+        sans: ["Geist", "Inter", "system-ui", "sans-serif"],
+        display: ['"Inter Tight"', "Geist", "system-ui", "sans-serif"],
+        mono: ['"Geist Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+      },
+      maxWidth: {
+        shell: "1320px",
       },
       boxShadow: {
-        card: "0 18px 50px -20px rgba(60,42,33,0.28)",
-        ember: "0 12px 40px -8px rgba(232,125,62,0.45)",
-        gold: "0 0 60px -12px rgba(201,162,39,0.4)",
-      },
-      backgroundImage: {
-        "cream-glow":
-          "radial-gradient(ellipse 70% 50% at 50% -10%, rgba(232,125,62,0.12), transparent 55%), radial-gradient(circle at 12% 88%, rgba(60,42,33,0.06), transparent 42%), radial-gradient(circle at 90% 8%, rgba(60,42,33,0.05), transparent 40%)",
+        glow: "0 0 80px -20px rgba(185,217,255,0.25)",
+        "glow-sm": "0 0 24px -6px rgba(185,217,255,0.35)",
       },
     },
   },

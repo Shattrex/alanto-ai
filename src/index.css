@@ -4,183 +4,251 @@
 
 @layer base {
   html {
+    background: #070707;
+    color-scheme: dark;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply antialiased bg-cream-100 text-ink-700;
+    @apply bg-base font-sans text-fg antialiased;
+    position: relative;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgba(185, 217, 255, 0.28);
+    color: #fff;
+  }
+  *:focus-visible {
+    outline: 1px solid #b9d9ff;
+    outline-offset: 3px;
+  }
+  section[id] {
+    scroll-margin-top: 56px;
+  }
+  /* Grid items never force their track wider than the viewport */
+  .grid > * {
+    min-width: 0;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #070707;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1b1b1f;
+    border: 2px solid #070707;
   }
 }
 
-/* Heading treatments lifted from the live alantoai.com hero and sections. */
-.head {
-  font-family: "Bebas Neue", Impact, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: #3b2a1c;
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 md:px-10;
+  }
+  /* Tracked technical label */
+  .label {
+    @apply font-mono text-[12.5px] uppercase tracking-[0.16em] text-mute;
+  }
+  .label-xs {
+    @apply font-mono text-[11.5px] uppercase tracking-[0.14em] text-mute;
+  }
+  /* Editorial display type */
+  .display {
+    @apply font-display font-semibold uppercase leading-[0.96] tracking-[-0.035em];
+  }
+  .panel {
+    @apply relative border border-line bg-r1;
+  }
+  .text-silver {
+    background: linear-gradient(180deg, #ffffff 0%, #c9cad0 45%, #6f7078 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-silver-h {
+    background: linear-gradient(90deg, #ffffff 0%, #b9d9ff 50%, #8f9097 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Architectural technical grid */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .grid-bg-sm {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .mask-radial {
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+  }
+  .mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  }
+  .hair-top {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  }
 }
 
-.head-shadow {
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
+/* Soft film-grain over the whole site */
+.noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-.head-glow {
-  text-shadow:
-    0 0 6px rgba(253, 224, 71, 0.6),
-    0 0 12px rgba(253, 224, 71, 0.3);
-}
-
-.caret {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  margin-left: 2px;
-  background: #e87d3e;
-  vertical-align: -0.12em;
-  animation: blink 0.9s steps(1) infinite;
-}
-
+/* ---------- Motion primitives ---------- */
 @keyframes blink {
   50% {
-    opacity: 0;
+    opacity: 0.25;
   }
 }
-
-@keyframes scan {
+@keyframes ping-ring {
   0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(400%);
-  }
-}
-
-@keyframes ring-pulse {
-  0% {
-    transform: scale(0.85);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.55);
-    opacity: 0;
-  }
-}
-
-@keyframes float-y {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-x {
-  from {
-    opacity: 0;
-    transform: translateX(-14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes frame-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.86) translateY(24px);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.03) translateY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.frame-pop {
-  animation: frame-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes reveal-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.4);
-  }
-  70% {
-    transform: scale(1.06);
-  }
-  100% {
-    opacity: 1;
     transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scan-y {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(520%);
+  }
+}
+@keyframes scan-x {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+@keyframes drop-v {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 4px);
+    opacity: 0;
+  }
+}
+@keyframes spin-border {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Reveals are CSS-driven with fill-mode both so content can never be
-   left stranded at opacity 0 if animation frames are throttled. */
-.reveal {
-  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+.dot-live {
+  animation: blink 1.8s ease-in-out infinite;
+}
+.svg-rot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin-slow 70s linear infinite;
+}
+.svg-rot-rev {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin-rev 45s linear infinite;
+}
+.core-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ping-ring 3.6s ease-out infinite;
+}
+.line-flow {
+  stroke-dasharray: 2 10;
+  animation: dash-flow 1.6s linear infinite;
+}
+.net-in {
+  opacity: 0;
+  animation: fade-in 1s ease forwards;
+}
+.scan-line {
+  animation: scan-y 5.5s linear infinite;
+}
+.scan-bar {
+  animation: scan-x 2.2s ease-in-out infinite;
+}
+.drop-v {
+  animation: drop-v 2.4s ease-in-out infinite;
+}
+.net-node rect {
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+.net-node:hover rect {
+  stroke: #b9d9ff;
+  fill: #101012;
 }
 
-.reveal-x {
-  animation: reveal-x 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.reveal-pop {
-  animation: reveal-pop 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+/* hide number input spinners etc. */
+input::placeholder,
+textarea::placeholder {
+  color: #5c5d64;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal-x,
-  .reveal-pop,
-  .frame-pop {
-    animation-duration: 0.01s;
-    animation-delay: 0s !important;
+  html {
+    scroll-behavior: auto;
   }
-}
-
-.scan-line {
-  animation: scan 2.4s linear infinite;
-}
-
-.ring-pulse {
-  animation: ring-pulse 1.8s ease-out infinite;
-}
-
-.float-y {
-  animation: float-y 4s ease-in-out infinite;
-}
-
-.no-scrollbar {
-  scrollbar-width: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.hanger-stage {
-  perspective: 1400px;
-  perspective-origin: 50% 50%;
-}
-
-.hanger-card {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  will-change: transform, opacity, filter;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .signal {
+    display: none;
+  }
+  .net-in {
+    opacity: 1;
+  }
 }
